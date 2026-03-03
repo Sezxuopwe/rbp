@@ -23,6 +23,10 @@ exports.handler = async () => {
       body: JSON.stringify(images),
     };
   } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+    console.log('ERROR:', err.message); // เพิ่มบรรทัดนี้
+    return { 
+      statusCode: 500, 
+      body: JSON.stringify({ error: err.message, stack: err.stack }) 
+    };
   }
 };
