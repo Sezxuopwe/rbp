@@ -5,10 +5,13 @@ let autoScrollSpeed = 0.15;
 async function loadImagesFromStorage() {
   try {
     const res = await fetch('/.netlify/functions/getImages');
-    sampleImages = await res.json();
+    const data = await res.json();
+    sampleImages = Array.isArray(data) ? data : [];
     renderGallery();
   } catch (err) {
     console.error('โหลดรูปไม่ได้:', err);
+    sampleImages = [];
+    renderGallery();
   }
 }
 
@@ -152,4 +155,5 @@ window.addEventListener('load', () => {
   loadImagesFromStorage();
   setupAutoScroll();
 });
+
 
