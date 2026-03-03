@@ -65,9 +65,9 @@ document.getElementById('fileInput').addEventListener('change', async (e) => {
         const data = await res.json();
         sampleImages.push({ url: data.url, alt: file.name });
         renderGallery();
-        console.log('✅ อัพโหลดสำเร็จ:', file.name);
+        console.log('อัพโหลดสำเร็จ:', file.name);
       } catch (err) {
-        console.error('❌ อัพโหลดไม่ได้:', err);
+        console.error(' อัพโหลดไม่ได้:', err);
       }
     };
     reader.readAsDataURL(file);
@@ -152,3 +152,4 @@ window.addEventListener('load', () => {
   loadImagesFromStorage();
   setupAutoScroll();
 });
+
