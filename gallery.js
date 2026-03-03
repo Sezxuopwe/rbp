@@ -15,9 +15,19 @@ async function loadImagesFromStorage() {
   }
 }
 
-function removeImage(index) {
-  sampleImages.splice(index, 1);
-  renderGallery();
+async function removeImage(index) {
+  const image = sampleImages[index];
+  
+  try {
+    await fetch('/.netlify/functions/deleteImage', {
+      method: 'POST',
+      body: JSON.stringify({ public_id: image.alt }), // alt คือ public_id จาก getImages
+    });
+    sampleImages.splice(index, 1);
+    renderGallery();
+  } catch (err) {
+    console.error('❌ ลบไม่ได้:', err);
+  }
 }
 
 function renderGallery() {
