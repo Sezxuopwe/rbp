@@ -1,0 +1,150 @@
+/* ==========================================
+   MAIN BODY STYLING
+   ========================================== */
+body {
+    /* พื้นหลังเริ่มต้น - สามารถเปลี่ยนเป็น background-image ได้ */
+    background-image: url('bg.jpg');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+    
+    /* วิธีเพิ่มรูปพื้นหลัง (ลบ comments ด้านบน แล้วใช้บรรทัดนี้):
+    background-image: url('bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   LOGIN CONTAINER - GLASSMORPHISM EFFECT
+   ========================================== */
+/* Container ที่มี blur background ใส ๆ เพื่อให้เห็นพื้นหลัง */
+.login-container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 350px;
+    width: 90%;
+}
+/* ==========================================
+   HEADING STYLING
+   ========================================== */
+/* หัวข้อ "For baipor" */
+h1 {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    outline: none;
+    border-radius: 20px;
+    margin: 0 auto 20px auto;
+    padding: 15px;
+    width: 100%;
+    display: block;
+    font-size: 28px;
+}
+
+/* Wave title effect - ตัวอักษรหายแล้วมาทีละตัวแบบลื่น */
+.wave-title {
+    letter-spacing: 2px;
+    white-space: normal;
+    animation: floating 3s ease-in-out infinite;
+}
+
+.wave-title span {
+    display: inline-block;
+    animation: waveIn 0.8s ease-out forwards;
+    animation-delay: var(--delay);
+}
+
+/* Animation - ตัวอักษรค่อย ๆ ปรากฏขึ้นแบบลื่น */
+@keyframes waveIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation - ตัวอักษรลอยขึ้นลงซ้ำ ๆ */
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+/* ==========================================
+   INPUT FIELDS STYLING
+   ========================================== */
+/* Email และ Password input fields */
+input {
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    outline: none;
+
+    border-radius: 20px;
+
+    background-color: rgba(255, 255, 255, 0.9);
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    width: 100%;
+    max-width: 250px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+/* เมื่อ focus input field - ทำให้สว่างขึ้น */
+input:focus {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+/* ==========================================
+   BUTTON STYLING
+   ========================================== */
+/* Login button */
+button {
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    outline: none;
+
+    border-radius: 20px;
+
+    background-color: rgba(255, 255, 255, 0.9);
+    display: block;
+    margin: 20px auto 10px auto;
+    padding: 12px;
+    width: 100%;
+    max-width: 250px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff9a9e;
+}
+
+/* เมื่อ hover button - ยก button ขึ้นมาเล็กน้อย */
+button:hover {
+    background-color: rgb(255, 255, 255);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* เมื่อ click button - กลับมายังตำแหน่งเดิม */
+button:active {
+    transform: translateY(0);
+}

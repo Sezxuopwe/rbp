@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Gallery - baipor</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="gallery-title">Memory Gallery</h1>
+        
+        <div class="gallery-wrapper">
+            <div class="gallery-container">
+                <div class="gallery-grid" id="galleryGrid" role="main" aria-label="Gallery of memories">
+                    <!-- Images will be dynamically added here -->
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Floating Action Button + hidden file picker for gallery -->
+    <input type="file" id="fileInput" accept="image/*" multiple style="display:none" />
+    <button class="fab" id="fabBtn" title="Add new memory" aria-label="Add new memory to gallery">+</button>
+
+    <!-- Modal Lightbox -->
+    <div class="modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Close image viewer">✕</button>
+            <button class="modal-nav prev" id="modalPrev" aria-label="Previous image">❮</button>
+            <img id="modalImage" class="modal-image" alt="Enlarged memory image" />
+            <button class="modal-nav next" id="modalNext" aria-label="Next image">❯</button>
+        </div>
+    </div>
+
+    <script type="module" src="gallery.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-container">
+  <h1 class="wave-title">
+    <span style="--delay: 0s;">F</span>
+    <span style="--delay: 0.1s;">o</span>
+    <span style="--delay: 0.2s;">r</span>
+    <span style="--delay: 0.3s;"> </span>
+    <span style="--delay: 0.4s;">b</span>
+    <span style="--delay: 0.5s;">a</span>
+    <span style="--delay: 0.6s;">i</span>
+    <span style="--delay: 0.7s;">p</span>
+    <span style="--delay: 0.8s;">o</span>
+    <span style="--delay: 0.9s;">r</span>
+  </h1>
+
+  <!-- Username input field -->
+  <input type="text" id="username" placeholder="ชื่อผู้ใช้" required>
+
+  <!-- Password input field -->
+  <input type="password" id="password" placeholder="Password" required>
+
+  <!-- Login button -->
+  <button id="loginBtn">Login</button>
+
+  <!-- Status message -->
+  <p id="statusMsg" style="color: red; text-align: center; margin-top: 10px;"></p>
+</div>
+
+<script>
+// Simple client-side login with local storage
+function showMessage(message, color = "red") {
+  const statusMsg = document.getElementById("statusMsg");
+  statusMsg.textContent = message;
+  statusMsg.style.color = color;
+}
+
+// Handle login button click
+document.getElementById("loginBtn").addEventListener("click", async () => {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  // Validate inputs
+  if (!username || !password) {
+    showMessage("กรุณากรอก ชื่อผู้ใช้ และ Password");
+    return;
+  }
+
+  if (username.length < 3) {
+    showMessage("ชื่อผู้ใช้ต้องมีอย่างน้อย 3 ตัวอักษร");
+    return;
+  }
+
+  showMessage("กำลังเข้าสู่ระบบ...", "orange");
+
+  try {
+    const response = await fetch('/.netlify/functions/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    });
+
+    if (response.ok) {
+      // Store username in local storage
+      localStorage.setItem("username", username);
+      localStorage.setItem("isLoggedIn", "true");
+      
+      showMessage("เก่งมากครับเข้าได้แล้วนะครับที่รัก", "green");
+      
+      // Redirect to main page
+      setTimeout(() => {
+        window.location.href = "homepage.html";
+      }, 500);
+    } else {
+      const error = await response.json();
+      showMessage("รหัสไม่ถูกนะหรือว่าไม่ใช่แฟนผมครับ ถ้าเป็นแฟนผมต้องรู้นะครับ");
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    showMessage("เกิดข้อผิดพลาด: " + error.message);
+  }
+});
+</script>
+</body>
+</html>
