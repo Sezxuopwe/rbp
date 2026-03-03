@@ -1,18 +1,24 @@
-// ...existing code...
-import { useNavigate } from 'react-router-dom';
-function Login() {
-  const navigate = useNavigate();
-  async function handleSubmit(e) {
-    e.preventDefault();
-    // ทำการ authenticate ที่นี่
-    const ok = true; // เปลี่ยนเป็นผลจริง
-    if (ok) navigate('/dashboard');
-    else alert('Login failed');
+// netlify/functions/login.js
+exports.handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
   }
-  return (
-    <form onSubmit={handleSubmit}>
-      {/* ...fields... */}
-      <button type="submit">Login</button>
-    </form>
-  );
-}
+
+  const { username, password } = JSON.parse(event.body);
+
+
+  const CORRECT_USER = "rakbaipor";
+  const CORRECT_PASS = "baiporlnwza";
+
+  if (username === CORRECT_USER && password === CORRECT_PASS) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: "Welcome back!" }),
+    };
+  } else {
+    return {
+      statusCode: 401,
+      body: JSON.stringify({ message: "Login Failed" }),
+    };
+  }
+};
