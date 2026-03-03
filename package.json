@@ -1,7 +1,7 @@
 {
   "name": "openscr",
   "version": "1.0.0",
-  "description": "",
+  "description": "dependencies",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@netlify/neon": "^0.1.2"
+    "@netlify/neon": "^0.1.2",
+    "cloudinary": "^1.41.0"
   }
 }
