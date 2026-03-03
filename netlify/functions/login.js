@@ -1,20 +1,24 @@
-const { neon } = require('@netlify/neon');
-
+// netlify/functions/login.js
 exports.handler = async (event) => {
-  // รับค่า Email และ Password จากหน้าเว็บ
-  const { email, password } = JSON.parse(event.body);
-  const sql = neon(process.env.NETLIFY_DATABASE_URL);
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
 
-  try {
-    // ไปค้นในตาราง users ที่เราสร้างไว้ใน Neon
-    const user = await sql`SELECT * FROM users WHERE username = ${email} AND password = ${password}`;
+  const { username, password } = JSON.parse(event.body);
 
-    if (user.length > 0) {
-      return { statusCode: 200, body: JSON.stringify({ message: "Welcome back!" }) };
-    } else {
-      return { statusCode: 401, body: JSON.stringify({ message: "Login Failed" }) };
-    }
-  } catch (error) {
-    return { statusCode: 500, body: JSON.stringify({ error: error.message }) };
+  // ✅ แก้ตรงนี้
+  const CORRECT_USER = "rakbaipor";
+  const CORRECT_PASS = "baiporlnwza";
+
+  if (username === CORRECT_USER && password === CORRECT_PASS) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: "Welcome back!" }),
+    };
+  } else {
+    return {
+      statusCode: 401,
+      body: JSON.stringify({ message: "Login Failed" }),
+    };
   }
 };
